@@ -22,5 +22,8 @@ app.UseDeveloperExceptionPage(); //mi fa vedere gli errori che riscontro nelle p
 app.UseStaticFiles();
 
 app.MapDefaultControllerRoute();//  questo metodo controlla tutte le nostre rotte delle view, cioe per assicurare ch epossiamo vedere le pagine
+/*app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");*/
 DbInitializer.Seed(app);
 app.Run();

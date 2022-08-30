@@ -39,7 +39,7 @@
 
         private static Dictionary<string, Category>? categories;
 
-        public static Dictionary<string, Category> Categories
+        public static Dictionary<string, Category> Categories 
         {
             get
             {
