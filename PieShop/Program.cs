@@ -7,23 +7,32 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPieRepository, PieRepository>();
 
+builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<PieShopDbContext>(options => {
     options.UseSqlServer(
         builder.Configuration["ConnectionStrings:PieShopDbContextConnection"]);
 });
+
 var app = builder.Build();
 
-if(app.Environment.IsDevelopment())//se l app e in uso effettivamente allora:
+//app.MapGet("/", () => "Hello World!");
+if (app.Environment.IsDevelopment())
 {
-
-app.UseDeveloperExceptionPage(); //mi fa vedere gli errori che riscontro nelle pagine
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseStaticFiles();
+app.UseSession();
 
-app.MapDefaultControllerRoute();//  questo metodo controlla tutte le nostre rotte delle view, cioe per assicurare ch epossiamo vedere le pagine
-/*app.MapControllerRoute(
+//app.MapDefaultControllerRoute();
+
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 DbInitializer.Seed(app);
+
 app.Run();

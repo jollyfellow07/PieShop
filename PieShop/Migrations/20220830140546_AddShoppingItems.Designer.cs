@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PieShop.Models;
 
@@ -10,9 +11,10 @@ using PieShop.Models;
 namespace PieShop.Migrations
 {
     [DbContext(typeof(PieShopDbContext))]
-    partial class PieShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220830140546_AddShoppingItems")]
+    partial class AddShoppingItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
